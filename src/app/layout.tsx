@@ -1,6 +1,8 @@
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import Link from 'next/link'
+import {usePathname} from 'next/navigation'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -14,8 +16,14 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  const pathname = usePathname();//проверка на ссылку в адрессной строке
+  //в хедере проверка - если путь не равен главной странице, то рендерим ссылку на неё в лого
+
   return (
     <html lang="en">
+      <header>
+        {pathname !== '/' && <Link href='/'>Main</Link>}
+      </header>
       <body className={inter.className}>{children}</body>
     </html>
   )
